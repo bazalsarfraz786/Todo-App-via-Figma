@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | Todo App</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <nav id="sidebar">
+        <button
+          class="nav-button active"
+          id="nav-task"
+          onclick="switchTab('task')"
+        >
+          <i class="fas fa-clipboard-list"></i>
+          <span>Task</span>
+        </button>
+
+        <button
+          class="nav-button"
+          id="nav-location"
+          onclick="switchTab('location')"
+        >
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Location</span>
+        </button>
+
+        <button class="nav-button logout" onclick="handleLogout()">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </button>
+      </nav>
+
+      <main class="main-content">
+        <div id="view-task">
+          <button class="text-trigger-btn" onclick="openModal('task-modal')">
+            <i class="fas fa-plus"></i> Add new task
+          </button>
+
+          <div class="progress-container">
+            <div class="progress-header">
+              <span class="progress-title">Your Progress</span>
+              <span id="progress-text">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div id="progress-fill" class="progress-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="tasks-container">
+            <div class="tasks-section">
+              <h2 class="section-title">Incomplete</h2>
+              <div class="tasks-list" id="incomplete-list"></div>
+            </div>
+
+            <div class="tasks-section">
+              <h2 class="section-title">Completed</h2>
+              <div class="tasks-list" id="completed-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="view-location" style="display: none">
+          <button
+            class="text-trigger-btn"
+            onclick="openModal('location-modal')"
+          >
+            <i class="fas fa-plus"></i> Check In
+          </button>
+
+          <div class="tasks-section">
+            <h2 class="section-title">Current location</h2>
+            <div class="location-list" id="location-list"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div id="task-modal" class="modal-overlay">
+      <div class="modal-content">
+        <h2 class="modal-title">New Task</h2>
+
+        <div class="modal-input-group">
+          <div class="modal-input-icon"><i class="far fa-comment-alt"></i></div>
+          <input
+            type="text"
+            id="task-summary"
+            class="modal-input"
+            placeholder="Summary"
+          />
+        </div>
+
+        <div class="modal-input-group">
+          <div class="modal-input-icon"><i class="fas fa-align-left"></i></div>
+          <input
+            type="text"
+            id="task-desc"
+            class="modal-input"
+            placeholder="Description"
+          />
+        </div>
+
+        <div class="modal-input-group">
+          <div class="modal-input-icon"><i class="far fa-clock"></i></div>
+          <input
+            type="datetime-local"
+            id="task-date"
+            class="modal-input"
+            placeholder="Due date"
+          />
+        </div>
+
+        <button class="btn-black-pill" onclick="saveTask()">Save</button>
+        <button class="btn-text-only" onclick="closeModal('task-modal')">
+          Cancel
+        </button>
+      </div>
+    </div>
+
+    <div id="location-modal" class="modal-overlay">
+      <div class="modal-content">
+        <h2 class="modal-title">Check In</h2>
+
+        <div class="modal-input-group">
+          <div class="modal-input-icon"><i class="fas fa-map-pin"></i></div>
+
+          <input
+            type="text"
+            id="loc-coords"
+            class="modal-input"
+            placeholder="Detecting..."
+            readonly
+          />
+
+          <button
+            class="btn-refresh"
+            onclick="detectLocation()"
+            title="Retry Location"
+          >
+            <i class="fas fa-sync-alt"></i>
+          </button>
+        </div>
+
+        <div class="modal-input-group">
+          <div class="modal-input-icon"><i class="fas fa-tag"></i></div>
+          <input
+            type="text"
+            id="loc-name"
+            class="modal-input"
+            placeholder="Location Name (e.g. Home)"
+          />
+        </div>
+
+        <button class="btn-black-pill" onclick="saveLocation()">Confirm</button>
+        <button class="btn-text-only" onclick="closeModal('location-modal')">
+          Cancel
+        </button>
+      </div>
+    </div>
+
+    <div id="reminder-toast" class="toast">
+      <div class="toast-content">
+        <h4 id="reminder-title">Title</h4>
+        <p id="reminder-time">Time</p>
+      </div>
+      <div class="toast-actions">
+        <button onclick="dismissReminder()">Dismiss</button>
+      </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/todo.js"></script>
+  </body>
+</html>

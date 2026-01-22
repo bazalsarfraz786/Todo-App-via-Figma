@@ -1,0 +1,552 @@
+/* style.css - FULL VERSION */
+
+/* =========================================
+   1. RESET & GLOBAL STYLES
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 14px;
+    line-height: 1.4;
+    height: 100vh;
+    overflow: hidden; /* Main scroll is inside main-content */
+}
+
+/* =========================================
+   2. LOGIN PAGE STYLES (Keep existing)
+   ========================================= */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 0 20px;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.login-header h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.input-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    margin-bottom: 8px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #ffffff;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #000000;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #666666;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: #ff3b30;
+    font-size: 13px;
+    margin-top: 6px;
+    display: none;
+}
+
+.login-button {
+    width: 100%;
+    padding: 12px;
+    background: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.login-button:hover {
+    background: #333333;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 24px;
+    color: #666666;
+    font-size: 13px;
+}
+
+/* =========================================
+   3. APP DASHBOARD LAYOUT
+   ========================================= */
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* SIDEBAR - Fixed Width */
+#sidebar {
+    width: 280px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    /* Important: Removed padding-left so active button touches edge */
+    padding: 40px 20px 40px 0; 
+    height: 100%;
+    flex-shrink: 0;
+}
+
+/* SIDEBAR BUTTONS - Specific Shape */
+.nav-button {
+    width: 100%;
+    padding: 16px 0 16px 40px; /* Left padding moves text inside */
+    /* Only round the right side corners */
+    border-radius: 0 50px 50px 0; 
+    border: none;
+    background: transparent;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    margin-bottom: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.nav-button i {
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+}
+
+.nav-button:hover {
+    background: #f9f9f9;
+}
+
+/* Active State - Black, touching left edge */
+.nav-button.active {
+    background: #000000;
+    color: #ffffff;
+    box-shadow: 2px 4px 12px rgba(0,0,0,0.1);
+}
+
+.nav-button.logout {
+    margin-top: auto;
+    color: #000;
+    font-weight: 600;
+    padding-left: 40px; /* Align with other buttons */
+}
+
+/* MAIN CONTENT */
+.main-content {
+    flex: 1;
+    padding: 40px 60px;
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+
+/* =========================================
+   4. TRIGGER BUTTONS (Add Task / Check In)
+   ========================================= */
+.text-trigger-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700; /* Bold */
+    color: #000000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding: 0;
+}
+
+.text-trigger-btn i {
+    font-size: 14px;
+}
+
+.text-trigger-btn:hover {
+    opacity: 0.7;
+}
+
+/* =========================================
+   5. TASK LIST STYLES
+   ========================================= */
+.tasks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.task-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px 0;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.task-checkbox {
+    margin-right: 15px;
+    margin-top: 2px;
+}
+
+.task-checkbox input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+}
+
+.task-checkbox input[type="checkbox"]:checked {
+    background: #000;
+    border-color: #000;
+}
+
+.task-checkbox input[type="checkbox"]:checked::after {
+    content: '✓';
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.task-content { flex: 1; }
+
+.task-text {
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.task-date {
+    font-size: 13px;
+    color: #ff6b6b; /* Red date */
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #bbb;
+}
+
+.task-item.completed .task-date {
+    display: none;
+}
+
+/* =========================================
+   6. LOCATION LIST
+   ========================================= */
+.location-item {
+    padding: 20px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.loc-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.loc-icon {
+    color: #ff3b30;
+    font-size: 18px;
+    margin-top: 3px;
+}
+
+.loc-details h4 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 4px;
+}
+
+.loc-details p {
+    font-size: 13px;
+    color: #999;
+}
+
+/* =========================================
+   7. MODAL / POPUP STYLES
+   ========================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #000;
+}
+
+/* Underlined Inputs */
+.modal-input-group {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+.modal-input-group:focus-within {
+    border-bottom-color: #000;
+}
+
+.modal-input-icon {
+    color: #666;
+    font-size: 18px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-input {
+    border: none;
+    outline: none;
+    font-size: 15px;
+    color: #333;
+    width: 100%;
+    padding-left: 10px;
+    background: transparent;
+}
+
+/* =========================================
+   8. POPUP BUTTONS (Save & Cancel)
+   ========================================= */
+.btn-black-pill {
+    background-color: #000000;
+    color: #ffffff;
+    width: 200px;
+    padding: 14px;
+    border-radius: 50px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: block;
+    margin: 40px auto 15px auto;
+    transition: transform 0.1s;
+}
+
+.btn-black-pill:active {
+    transform: scale(0.98);
+}
+
+.btn-text-only {
+    background: none;
+    border: none;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+}
+
+.btn-text-only:hover {
+    opacity: 0.7;
+}
+
+/* =========================================
+   9. TOAST
+   ========================================= */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ffffff;
+    width: 320px;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    z-index: 2000;
+    border-left: 4px solid #f5a623;
+    transform: translateX(150%);
+    transition: transform 0.4s;
+}
+
+.toast.active {
+    transform: translateX(0);
+}
+
+.toast h4 {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.toast p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.toast-actions {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.toast-actions button {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 13px;
+    color: #666;
+}
+
+
+
+/* ===== DELETE ICON STYLES ===== */
+.btn-delete {
+    background: none;
+    border: none;
+    color: #ff3b30; /* Red color */
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: auto; /* Pushes icon to the far right */
+    padding: 8px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.btn-delete:hover {
+    opacity: 1;
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-container {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f9f9f9; /* Subtle background box */
+    border-radius: 12px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 8px;
+    background-color: #e0e0e0; /* Gray empty bar */
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%; /* Starts at 0 */
+    background-color: #000000; /* Black filled bar */
+    border-radius: 10px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth animation */
+}
+
+/* ===== REFRESH BUTTON ===== */
+.btn-refresh {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    font-size: 14px;
+    padding: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-refresh:hover {
+    color: #000;
+    transform: rotate(180deg); /* Spins the icon when you hover */
+}
+
+.btn-refresh:active {
+    transform: scale(0.9);
+}
